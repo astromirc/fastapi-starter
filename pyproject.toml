@@ -1,0 +1,92 @@
+[project]
+name = "fastapi-starter"
+version = "0.0.1"
+description = ""
+readme = "README.md"
+requires-python = ">=3.14,<4.0"
+dependencies = [
+  "alembic==1.18.5",
+  "bcrypt==5.0.0",
+  "fastapi[standard]==0.139.2",
+  "psycopg[binary]==3.3.4",
+  "pydantic-settings==2.14.2",
+  "pyjwt==2.13.0",
+  "sqlmodel==0.0.39",
+  "tzdata==2026.2",
+]
+
+[dependency-groups]
+dev = [
+  "pytest==9.1.1",
+  "pytest-mock==3.15.1",
+  "ruff==0.16.00",
+]
+
+[tool.fastapi]
+entrypoint = "app.main:app"
+
+[tool.ruff]
+exclude = [".git", ".venv", "alembic"]
+line-length = 88
+target-version = "py314"
+cache-dir = "~/.cache/ruff"
+
+[tool.ruff.lint]
+select = [
+  "E",    # PEP 8 errors
+  "W",    # PEP 8 warnings
+  "F",    # Logic and syntax errors
+  "I",    # Import sorting
+  "B",    # Bug detection
+  "C4",   # Comprehensions
+  "UP",   # Syntax upgrades
+  "A",    # Built-in shadowing
+  "ARG",  # Unused arguments
+  "C90",  # Function complexity
+  "DTZ",  # Datetime without timezone
+  "ERA",  # Commented-out code
+  "N",    # Naming conventions
+  "PERF", # Performance issues
+  "PIE",  # General bad practices
+  "PTH",  # Use pathlib
+  "RET",  # Return statements
+  "S",    # Security checks
+  "T20",  # Print statements
+  "PL",   # Pylint rules
+  "FAST", # FastAPI
+]
+
+ignore = [
+  "B904", # Allow raising exceptions without from e
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+  "S101",    # Use of assert
+  "S106",    # Hardcoded password string
+  "S107",    # Hardcoded password function argument
+  "S105",    # Hardcoded password assigned to variable
+  "ARG001",  # Unused function argument
+  "PLR0913", # Too many arguments in function definition
+  "PLR2004", # Magic value in comparison
+  "E741",    # Ambiguous variable name
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-wrap-aliases = true
+known-first-party = ["app"]
+section-order = [
+  "standard-library",
+  "third-party",
+  "app-core",
+  "first-party",
+  "local-folder",
+]
+
+[tool.ruff.lint.isort.sections]
+"app-core" = ["app.core"]
+
+[tool.pytest.ini_options]
+cache_dir = "~/.cache/pytest_cache"
+pythonpath = ["."]

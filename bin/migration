@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+COMMAND="${1:-?}"
+
+case $COMMAND in
+    generate)
+        # New migration
+        if [ -z "${2-}" ]; then
+            echo "Usage: migration generate \"migration name\""
+            exit 1
+        fi
+
+        exec alembic revision --autogenerate -m "$2"
+        ;;
+
+    upgrade)
+        # Execute migrations (defaults to head)
+        REVISION="${2:-head}"
+        exec alembic upgrade "$REVISION"
+        ;;
+
+    downgrade)
+        # Rollback to a specific migration or revision
+        if [ -z "${2-}" ]; then
+            echo "Usage: migration downgrade <revision>"
+            exit 1
+        fi
+
+        exec alembic downgrade "$2"
+        ;;
+
+    *)
+        echo "Usage: migration <command>"
+        echo "Available commands: generate, upgrade, downgrade"
+        exit 0
+        ;;
+esac

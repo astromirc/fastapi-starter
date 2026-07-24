@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Ejecutar tests
+exec pytest "${@:-.}" --verbose --tb=short

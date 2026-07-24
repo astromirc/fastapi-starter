@@ -1,0 +1,70 @@
+### Git ###
+.git
+.gitignore
+.gitattributes
+
+### Operating system ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+### Python ###
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+.mypy_cache/
+.ruff_cache/
+
+### Environments ###
+.env
+.env.*
+.venv
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+### Testing and coverage ###
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+cover/
+
+### Logs ###
+*.log
+logs/
+*.pid
+
+### Temp files ###
+temp/
+tmp/
+*.tmp
+
+### IDE ###
+.vscode
+.windsurf
+.cursor
+.idea
+
+### App ###
+media

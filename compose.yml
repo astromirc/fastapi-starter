@@ -1,0 +1,11 @@
+services:
+  backend:
+    restart: always
+    build:
+      context: .
+      target: production
+    command: server
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
