@@ -25,7 +25,7 @@ def get_session() -> Generator[Session]:
 
 
 def get_current_user(
-    session: SessionDep,
+    session: DBSession,
     token: Annotated[str, Depends(oauth2_scheme)],
 ) -> User:
     user_id, _ = decode_token(token, token_type=TokenType.ACCESS_TOKEN)
@@ -46,6 +46,6 @@ def get_current_superuser(current_user: CurrentUser) -> User:
     return current_user
 
 
-SessionDep = Annotated[Session, Depends(get_session)]
+DBSession = Annotated[Session, Depends(get_session)]
 CurrentUser = Annotated[User, Depends(get_current_user)]
 CurrentSuperuser = Annotated[User, Depends(get_current_superuser)]

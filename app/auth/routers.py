@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from app.core.security import create_access_token
 
-from app.shared.dependencies import SessionDep
+from app.shared.dependencies import DBSession
 from app.shared.errors import InactiveUserError, InvalidCredentialsError
 from app.users.services import update_last_login
 
@@ -17,7 +17,7 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/login")
 def login(
-    session: SessionDep,
+    session: DBSession,
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> Token:
     user = services.authenticate_user(
@@ -40,7 +40,7 @@ def login(
 
 @router.post("/forgot-password", status_code=status.HTTP_202_ACCEPTED)
 def forgot_password(
-    session: SessionDep,
+    session: DBSession,
     data: ForgotPassword,
     background_tasks: BackgroundTasks,
 ) -> Message:
@@ -60,7 +60,7 @@ def forgot_password(
 
 @router.post("/reset-password", status_code=status.HTTP_200_OK)
 def reset_password(
-    session: SessionDep,
+    session: DBSession,
     data: ResetPassword,
     background_tasks: BackgroundTasks,
 ) -> Message:
