@@ -5,6 +5,7 @@ from app.shared.errors import (
     InactiveUserError,
     InvalidCredentialsError,
     InvalidTokenError,
+    PermissionDeniedError,
 )
 
 
@@ -26,6 +27,16 @@ def setup_exception_handlers(app: FastAPI) -> None:
     def inactive_user_handler(
         _request: Request,
         exc: InactiveUserError,
+    ) -> JSONResponse:
+        return JSONResponse(
+            status_code=status.HTTP_403_FORBIDDEN,
+            content={"detail": exc.message},
+        )
+
+    @app.exception_handler(PermissionDeniedError)
+    def permission_denied_handler(
+        _request: Request,
+        exc: PermissionDeniedError,
     ) -> JSONResponse:
         return JSONResponse(
             status_code=status.HTTP_403_FORBIDDEN,

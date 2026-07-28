@@ -24,3 +24,13 @@ class User(SQLModel, table=True):
         default=None,
         sa_type=DateTime(timezone=True),
     )
+
+
+class UserRead(SQLModel):
+    id: UUID
+    email: EmailStr
+    name: str
+    is_superuser: bool
+    is_active: bool
+    created_at: datetime
+    last_login: datetime | None

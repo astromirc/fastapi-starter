@@ -15,3 +15,7 @@ class InvalidCredentialsError(AppError):
 
 class InactiveUserError(AppError):
     message = "Tu cuenta está suspendida."
+
+
+class PermissionDeniedError(AppError):
+    message = "No tienes permisos para realizar esta acción."
