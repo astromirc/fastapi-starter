@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 
 from app.shared.errors import (
+    DuplicateEmailError,
     InactiveUserError,
     InvalidCredentialsError,
     InvalidTokenError,
@@ -40,6 +41,16 @@ def setup_exception_handlers(app: FastAPI) -> None:
     ) -> JSONResponse:
         return JSONResponse(
             status_code=status.HTTP_403_FORBIDDEN,
+            content={"detail": exc.message},
+        )
+
+    @app.exception_handler(DuplicateEmailError)
+    def duplicate_email_handler(
+        _request: Request,
+        exc: DuplicateEmailError,
+    ) -> JSONResponse:
+        return JSONResponse(
+            status_code=status.HTTP_409_CONFLICT,
             content={"detail": exc.message},
         )
 

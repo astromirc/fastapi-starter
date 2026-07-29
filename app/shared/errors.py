@@ -19,3 +19,7 @@ class InactiveUserError(AppError):
 
 class PermissionDeniedError(AppError):
     message = "No tienes permisos para realizar esta acción."
+
+
+class DuplicateEmailError(AppError):
+    message = "Ya existe un usuario asociado al correo ingresado."

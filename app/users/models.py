@@ -26,6 +26,12 @@ class User(SQLModel, table=True):
     )
 
 
+class UserCreate(SQLModel):
+    email: EmailStr = Field(max_length=50)
+    name: str = Field(max_length=50)
+    password: str = Field(min_length=8, max_length=50)
+
+
 class UserRead(SQLModel):
     id: UUID
     email: EmailStr

@@ -4,6 +4,7 @@ Plantilla base para proyectos FastAPI con PostgreSQL y Docker.
 
 ## Características
 
+- **Creación de superusuarios**: Comando interactivo para registrar administradores desde la terminal.
 - **Autenticación y Recuperación de Contraseña**: Flujos preconfigurados de inicio de sesión JWT y restablecimiento de contraseña por correo electrónico.
 - **Base de datos de pruebas aislada**: Las pruebas automatizadas se ejecutan en su propia base de datos independiente, evitando alterar los datos de desarrollo.
 - **Lista para producción**: CORS, manejo centralizado de excepciones y variables de entorno preconfiguradas. Solo necesitas definir las variables de entorno.
@@ -28,6 +29,7 @@ fastapi-starter/
 │   │   ├── dependencies.py
 │   │   ├── errors.py
 │   │   └── timezone.py
+│   ├── cli.py
 │   ├── templates/
 │   └── main.py
 ├── alembic/
@@ -93,6 +95,9 @@ $ docker compose exec backend bash
 Comandos disponibles dentro del contenedor:
 
 ```bash
+# Crear superusuario
+$ createsuperuser
+
 # Crear migraciones
 $ migration generate "nombre_de_la_migracion"
 
